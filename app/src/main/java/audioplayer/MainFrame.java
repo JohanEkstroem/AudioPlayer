@@ -1,23 +1,25 @@
 package audioplayer;
 
 import java.awt.*;
+import java.io.IOException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
+
 
 public class MainFrame extends JFrame {
   JButton playButton;
   JButton pauseButton;
   JButton stopButton;
-  MainFrame() {
+  Player player = new Player();
 
+  MainFrame() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
     JLabel topLabel = new JLabel();
     topLabel.setText("Welcome to my AudioPlayer");
     topLabel.setBounds(400, 60, 400, 100);
     topLabel.setFont(new Font("Roboto UI",Font.BOLD,20));
     topLabel.setForeground(Color.white);
-
-
-    topLabel.setBackground(Color.green);
     topLabel.setVerticalAlignment(JLabel.TOP);
     topLabel.setHorizontalAlignment(JLabel.CENTER);
 
@@ -34,7 +36,12 @@ public class MainFrame extends JFrame {
 
     playButton = new JButton();
     playButton.setBounds(450, 100, 100, 33);
-    playButton.addActionListener((e) -> {System.out.println("play");});
+    playButton.addActionListener((e) -> {System.out.println("play");try {
+      player.play();
+    } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
+      // TODO Auto-generated catch block
+      e1.printStackTrace();
+    }});
     playButton.setText("Play");
     
     pauseButton = new JButton();
@@ -44,20 +51,14 @@ public class MainFrame extends JFrame {
 
     stopButton = new JButton();
     stopButton.setBounds(650, 100, 100, 33);
-    stopButton.addActionListener((e) -> {System.out.println("stop");});
+    stopButton.addActionListener((e) -> {System.out.println("stop");player.stop();});
     stopButton.setText("Stop");
     
-
-
-    //this.add(redPanel);
     this.add(topLabel);
     this.add(playButton);
     this.add(pauseButton);
     this.add(stopButton);
-
-
   }
-
     
   
 }
