@@ -39,14 +39,14 @@ public class MainFrame extends JFrame {
     playButton.addActionListener((e) -> {System.out.println("play");try {
       player.play();
     } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e1) {
-      // TODO Auto-generated catch block
       e1.printStackTrace();
+      System.out.println("Cannot play file");
     }});
     playButton.setText("Play");
     
     pauseButton = new JButton();
     pauseButton.setBounds(550, 100, 100, 33);
-    pauseButton.addActionListener((e) -> {System.out.println("pause");});
+    pauseButton.addActionListener((e) -> {System.out.println("pause"); player.pause();});
     pauseButton.setText("Pause");
 
     stopButton = new JButton();

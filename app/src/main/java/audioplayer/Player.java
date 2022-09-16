@@ -31,6 +31,13 @@ public class Player {
     public void stop() {
         if (clip != null) {
             clip.stop();
+            clip.setMicrosecondPosition(0);
+        }
+    }
+    
+    public void pause() {
+        if(clip != null){
+            clip.stop();
         }
     }
 
